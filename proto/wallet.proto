@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package wallet.v1;
+
+option go_package = "github.com/yourusername/api-monetization-platform/proto;walletv1";
+
+service WalletService {
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+  rpc Credit(CreditRequest) returns (MutationResponse);
+  rpc Debit(DebitRequest) returns (MutationResponse);
+}
+
+message GetBalanceRequest {
+  string wallet_id = 1;
+}
+
+message GetBalanceResponse {
+  string wallet_id = 1;
+  int64 balance_minor = 2;
+  string currency = 3;
+}
+
+message CreditRequest {
+  string wallet_id = 1;
+  int64 amount_minor = 2;
+  string currency = 3;
+  string idempotency_key = 4;
+  string reference = 5;
+}
+
+message DebitRequest {
+  string wallet_id = 1;
+  int64 amount_minor = 2;
+  string currency = 3;
+  string idempotency_key = 4;
+  string reference = 5;
+}
+
+message MutationResponse {
+  string transaction_id = 1;
+  string wallet_id = 2;
+  int64 balance_minor = 3;
+  string currency = 4;
+  bool already_applied = 5;
+}

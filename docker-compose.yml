@@ -1,0 +1,29 @@
+services:
+  nats:
+    image: nats:2.11-alpine
+    command: ["-js", "-m", "8222"]
+    ports: ["4222:4222", "8222:8222"]
+
+  redis:
+    image: redis:7.4-alpine
+    ports: ["6379:6379"]
+
+  couchbase:
+    image: couchbase:community-7.6.2
+    ports:
+      - "8091-8097:8091-8097"
+      - "11210:11210"
+    environment:
+      COUCHBASE_ADMINISTRATOR_USERNAME: Administrator
+      COUCHBASE_ADMINISTRATOR_PASSWORD: password
+    volumes:
+      - couchbase_data:/opt/couchbase/var
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    ports: ["9099:9090"]
+    volumes:
+      - ./deployments/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+volumes:
+  couchbase_data:

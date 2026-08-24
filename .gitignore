@@ -1,0 +1,7 @@
+bin/
+.env
+*.log
+coverage.out
+vendor/
+proto/*.pb.go
+proto/*_grpc.pb.go

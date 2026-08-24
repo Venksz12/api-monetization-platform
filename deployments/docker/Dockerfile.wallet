@@ -1,0 +1,9 @@
+FROM golang:1.23 AS build
+WORKDIR /src
+COPY . .
+RUN go mod download
+RUN CGO_ENABLED=0 go build -o /out/wallet ./cmd/wallet
+
+FROM gcr.io/distroless/static-debian12
+COPY --from=build /out/wallet /wallet
+ENTRYPOINT ["/wallet"]
