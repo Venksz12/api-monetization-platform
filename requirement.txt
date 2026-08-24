@@ -1,0 +1,25 @@
+# System Requirements
+
+## Development Environment
+
+- Go 1.23+
+- Git
+- Docker Desktop
+- Docker Compose
+- Protocol Buffers compiler (`protoc`)
+- `protoc-gen-go`
+- `protoc-gen-go-grpc`
+- `grpcurl` (optional)
+
+## Infrastructure
+
+- NATS JetStream
+- Redis
+- Couchbase
+- Prometheus
+
+## Optional
+
+- Razorpay account for payment integration
+- OpenTelemetry Collector / OTLP backend
+- Kubernetes cluster
